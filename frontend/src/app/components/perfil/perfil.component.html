@@ -1,0 +1,79 @@
+<div class="min-h-screen bg-gray-100">
+
+  <nav class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+    <h1 class="text-lg font-bold text-gray-800">Mi Aplicación</h1>
+    <div class="flex items-center gap-4">
+      <span class="text-sm text-gray-500">Perfil</span>
+      <button
+        (click)="logout()"
+        class="text-sm text-red-500 hover:text-red-700 font-medium transition">
+        Cerrar sesión
+      </button>
+    </div>
+  </nav>
+
+  <div class="max-w-xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-md">
+
+    <h2 class="text-xl font-bold text-gray-800 mb-1">
+      {{ perfilExiste ? 'Actualizar perfil' : 'Crear perfil' }}
+    </h2>
+    <p class="text-sm text-gray-500 mb-6">Completa todos los campos requeridos</p>
+
+    <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <input type="text" formControlName="nombre"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <span *ngIf="perfilForm.get('nombre')?.invalid && perfilForm.get('nombre')?.touched"
+          class="text-red-500 text-xs mt-1 block">Campo obligatorio</span>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+        <input type="text" formControlName="apellido"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <span *ngIf="perfilForm.get('apellido')?.invalid && perfilForm.get('apellido')?.touched"
+          class="text-red-500 text-xs mt-1 block">Campo obligatorio</span>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Edad</label>
+        <input type="number" formControlName="edad"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <span *ngIf="perfilForm.get('edad')?.invalid && perfilForm.get('edad')?.touched"
+          class="text-red-500 text-xs mt-1 block">Debe ser un número válido</span>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Correo</label>
+        <input type="email" formControlName="correo"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <span *ngIf="perfilForm.get('correo')?.invalid && perfilForm.get('correo')?.touched"
+          class="text-red-500 text-xs mt-1 block">Ingresa un correo válido</span>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono (8 dígitos)</label>
+        <input type="text" formControlName="telefono"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <span *ngIf="perfilForm.get('telefono')?.invalid && perfilForm.get('telefono')?.touched"
+          class="text-red-500 text-xs mt-1 block">Ingresa un teléfono de 8 dígitos</span>
+      </div>
+
+      <div *ngIf="successMessage" class="mb-4 p-3 bg-green-100 text-green-600 rounded-lg text-sm text-center">
+        {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-100 text-red-600 rounded-lg text-sm text-center">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="loading"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50">
+        {{ loading ? 'Guardando...' : (perfilExiste ? 'Actualizar' : 'Crear perfil') }}
+      </button>
+
+    </form>
+  </div>
+</div>

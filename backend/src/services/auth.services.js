@@ -7,5 +7,12 @@ const login = async (username, password) => {
   );
   return result.rows[0] || null;
 };
+const registrar = async (username, email, password) => {
+  const result = await pool.query(
+    'INSERT INTO usuarios (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+    [username, email, password]
+  );
+  return result.rows[0];
+};
 
-module.exports = { login };
+module.exports = { login, registrar };

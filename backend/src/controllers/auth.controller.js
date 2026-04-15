@@ -1,4 +1,4 @@
-const authService = require('../services/auth.service');
+const authService = require('../services/auth.services');
 
 const login = async (req, res) => {
   try {
@@ -20,4 +20,22 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+const registrar = async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    }
+
+    const usuario = await authService.registrar(username, email, password);
+    res.status(201).json({ message: 'Usuario creado correctamente', userId: usuario.id });
+  } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({ message: 'El usuario o correo ya está registrado' });
+    }
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
+module.exports = { login, registrar };
