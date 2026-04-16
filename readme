@@ -1,0 +1,166 @@
+# Aplicaciones Web EP2 — Full Stack App
+
+Proyecto desarrollado para la Evaluación Parcial II del curso de Aplicaciones WEB en la Universidad Da Vinci de Guatemala. Consiste en una aplicación web full stack con Angular, Node.js y PostgreSQL.
+
+## 📹 Video de demostración
+
+[![Demo del proyecto](https://img.youtube.com/vi/S0_CMY16WHQ/0.jpg)](https://youtu.be/S0_CMY16WHQ?si=GUB-UVvALSXNupaz)
+
+---
+
+## 🧱 Tecnologías utilizadas
+
+- **Frontend:** Angular 19 (standalone) + Tailwind CSS
+- **Backend:** Node.js + Express
+- **Base de datos:** PostgreSQL
+
+---
+
+## 📁 Estructura del repositorio
+
+```
+ExamenParcial2/
+├── backend/
+│   ├── src/
+│   │   ├── db/
+│   │   │   └── pool.js
+│   │   ├── routes/
+│   │   │   ├── auth.routes.js
+│   │   │   └── perfil.routes.js
+│   │   ├── controllers/
+│   │   │   ├── auth.controller.js
+│   │   │   └── perfil.controller.js
+│   │   ├── services/
+│   │   │   ├── auth.service.js
+│   │   │   └── perfil.service.js
+│   │   └── app.js
+│   ├── .env
+│   └── package.json
+└── frontend/
+    └── src/
+        └── app/
+            ├── components/
+            │   ├── login/
+            │   ├── register/
+            │   └── perfil/
+            ├── services/
+            │   ├── auth.service.ts
+            │   └── perfil.service.ts
+            ├── guards/
+            │   └── auth.guard.ts
+            ├── app.routes.ts
+            └── app.config.ts
+```
+
+---
+
+## ⚙️ Configuración y ejecución
+
+### Requisitos previos
+
+- Node.js v18 o superior
+- Angular CLI v19
+- PostgreSQL corriendo en puerto 5433
+
+### Base de datos
+
+Crea la base de datos `AplicacionesWebEP2` en PostgreSQL y ejecuta los siguientes scripts:
+
+```sql
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password TEXT NOT NULL
+);
+
+CREATE TABLE perfil (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT UNIQUE,
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
+    edad INT,
+    correo VARCHAR(100),
+    telefono VARCHAR(20),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+```
+
+### Backend
+
+```bash
+cd backend
+npm install
+```
+
+Crea un archivo `.env` en la raíz de `backend/` con el siguiente contenido:
+
+```
+DB_HOST=127.0.0.1
+DB_PORT=5433
+DB_NAME=AplicacionesWebEP2
+DB_USER=postgres
+DB_PASSWORD=
+PORT=3000
+```
+
+Luego inicia el servidor:
+
+```bash
+npm run dev
+```
+
+El servidor estará disponible en `http://localhost:3000`.
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+ng serve
+```
+
+La aplicación estará disponible en `http://localhost:4200`.
+
+---
+
+## 🔌 Endpoints de la API
+
+### Autenticación
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | `/auth/login` | Iniciar sesión |
+| POST | `/auth/registrar` | Registrar nuevo usuario |
+
+### Perfil
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/perfil/:userId` | Obtener perfil del usuario |
+| POST | `/perfil/:userId` | Crear perfil del usuario |
+| PUT | `/perfil/:userId` | Actualizar perfil del usuario |
+
+---
+
+## 🖥️ Funcionalidades
+
+- Registro de usuario con validación de campos
+- Login con validación de credenciales contra la base de datos
+- Mensaje de error "Credenciales incorrectas" al fallar el login
+- Módulo de perfil protegido por AuthGuard
+- Crear y actualizar perfil con validaciones en frontend y backend
+- Cierre de sesión
+- Manejo de errores en frontend y backend
+
+---
+
+## 🔒 Consideraciones de seguridad
+
+Esta es una implementación básica para fines académicos. Para un entorno de producción se recomienda:
+
+- Implementar JWT para manejo de sesiones
+- Aplicar hashing de contraseñas con bcrypt
+- Usar HTTPS
+- Agregar límite de intentos de login
+- Gestionar variables de entorno de forma segura
