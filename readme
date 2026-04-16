@@ -2,13 +2,13 @@
 
 Proyecto desarrollado para la Evaluación Parcial II del curso de Aplicaciones WEB en la Universidad Da Vinci de Guatemala. Consiste en una aplicación web full stack con Angular, Node.js y PostgreSQL.
 
-## 📹 Video de demostración
+## Video de demostración
 
-[![Demo del proyecto](https://img.youtube.com/vi/S0_CMY16WHQ/0.jpg)](https://youtu.be/S0_CMY16WHQ?si=GUB-UVvALSXNupaz)
+https://www.youtube.com/watch?v=S0_CMY16WHQ
 
 ---
 
-## 🧱 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - **Frontend:** Angular 19 (standalone) + Tailwind CSS
 - **Backend:** Node.js + Express
@@ -16,7 +16,7 @@ Proyecto desarrollado para la Evaluación Parcial II del curso de Aplicaciones W
 
 ---
 
-## 📁 Estructura del repositorio
+## Estructura del repositorio
 
 ```
 ExamenParcial2/
@@ -54,7 +54,7 @@ ExamenParcial2/
 
 ---
 
-## ⚙️ Configuración y ejecución
+## Configuración y ejecución
 
 ### Requisitos previos
 
@@ -124,7 +124,7 @@ La aplicación estará disponible en `http://localhost:4200`.
 
 ---
 
-## 🔌 Endpoints de la API
+## Endpoints de la API
 
 ### Autenticación
 
@@ -143,7 +143,7 @@ La aplicación estará disponible en `http://localhost:4200`.
 
 ---
 
-## 🖥️ Funcionalidades
+## Funcionalidades
 
 - Registro de usuario con validación de campos
 - Login con validación de credenciales contra la base de datos
@@ -155,7 +155,7 @@ La aplicación estará disponible en `http://localhost:4200`.
 
 ---
 
-## 🔒 Consideraciones de seguridad
+## Consideraciones de seguridad
 
 Esta es una implementación básica para fines académicos. Para un entorno de producción se recomienda:
 
